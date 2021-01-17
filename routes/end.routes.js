@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Ended = require("../models/Ended");
 
-router.get("/", function (req, res) {
+router.get("/", async function (req, res) {
   try {
     const endedCalls = await Ended.find();
     res.json(endedCalls);
