@@ -3,7 +3,12 @@ var router = express.Router();
 var Started = require("../models/Started");
 
 router.get("/", function (req, res, next) {
-  res.json({ message: "respond with a resource" });
+  try {
+    const startedCalls = await Started.find();
+    res.json(startedCalls);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 router.post("/", async function (req, res) {

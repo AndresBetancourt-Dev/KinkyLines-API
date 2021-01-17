@@ -2,8 +2,13 @@ var express = require("express");
 var router = express.Router();
 var Ended = require("../models/Ended");
 
-router.get("/", function (req, res, next) {
-  res.json({ message: "respond with a resource" });
+router.get("/", function (req, res) {
+  try {
+    const endedCalls = await Ended.find();
+    res.json(endedCalls);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
 router.post("/", async function (req, res) {
